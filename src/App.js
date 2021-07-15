@@ -24,25 +24,30 @@ function App() {
   }
 
   return (
-    <>
-      <div className="container">
-        <DndContext
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-          modifiers={[restrictToVerticalAxis, restrictToParentElement]}
-        >
-          <SortableContext
-            items={items}
-            strategy={verticalListSortingStrategy}
+    <div className="app">
+      <div>
+        <div className="container">
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+            modifiers={[restrictToVerticalAxis, restrictToParentElement]}
           >
-            {items.map(o => <SortableItem key={o.id} data={o} disabled={!isSortEnabled} />)}
-          </SortableContext>
-        </DndContext>
+            <SortableContext
+              items={items}
+              strategy={verticalListSortingStrategy}
+            >
+              {items.map(o => <SortableItem key={o.id} data={o} disabled={!isSortEnabled} />)}
+            </SortableContext>
+          </DndContext>
+        </div>
+        <button type="button" onClick={() => setSortEnabled(prev => !prev)}>
+          {isSortEnabled ? 'disable sort' : 'enable sort'}
+        </button>
       </div>
-      <button type="button" onClick={() => setSortEnabled(prev => !prev)}>
-        {isSortEnabled ? 'disable sort' : 'enable sort'}
-      </button>
-    </>
+      <pre className="state">
+        {JSON.stringify(items.map(({ id, blend_name }) => ({ id, blend_name })), undefined, 2)}
+      </pre>
+    </div>
   );
 }
 

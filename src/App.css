@@ -5,7 +5,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 300px;
 }
 
 .container .item {
@@ -29,4 +29,12 @@ body {
 .container .item .desc {
     color: gray;
     font-size: 90%;
+}
+
+.app {
+    display: flex;
+}
+.state {
+    padding: 0;
+    margin: 0 0 0 3em;
 }
