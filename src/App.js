@@ -12,6 +12,12 @@ function App() {
   const [items, setItems] = useState(data);
   const [isSortEnabled, setSortEnabled] = useState(true);
 
+  const handleDragStart = ({ active }) => {
+    if (!active) {
+      return;
+    }
+  }
+
   const handleDragEnd = ({ active, over }) => {
     if (active.id !== over.id) {
       setItems((items) => {
@@ -29,6 +35,7 @@ function App() {
         <div className="container">
           <DndContext
             collisionDetection={closestCenter}
+            onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             modifiers={[restrictToVerticalAxis, restrictToParentElement]}
           >
@@ -52,21 +59,22 @@ function App() {
 }
 
 const SortableItem = ({ data, disabled }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: data.id, disabled: disabled });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: data.id, disabled });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
     transition,
+    zIndex: isDragging ? 100 : undefined
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} title={!disabled ? "Drag to sort" : null}
-      className={classNames({ item: true, sortable: !disabled })}>
+    <div ref={setNodeRef} style={style} {...attributes} className={classNames({ item: true, sortable: !disabled })}>
       <div>
         <div className="title">{data.blend_name}</div>
         <div className="desc">{data.origin}</div>
       </div>
-      {!disabled && <img src={DragHandle} alt="Drag handle" className="dragHandle" />}
+      {!disabled && <img src={DragHandle} alt="Drag handle" className="dragHandle" {...listeners}
+        title={!disabled ? "Drag to sort" : null} />}
     </div>
   );
 }
