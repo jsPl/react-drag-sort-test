@@ -47,4 +47,78 @@ const coffees = [
     }
 ];
 
-export { coffees }
+// https://random-data-api.com/api/dessert/random_dessert?size=10
+const desserts = [
+    {
+        "id": 6000,
+        "uid": "e6c9602f-bd03-4fc0-9eb1-8fb00bf9c464",
+        "variety": "Parfait",
+        "topping": "Cinnamon",
+        "flavor": "Neapolitan"
+    },
+    {
+        "id": 3268,
+        "uid": "bc30afc2-ec55-4404-9924-5652a0b88793",
+        "variety": "Cookie",
+        "topping": "Powdered Sugar",
+        "flavor": "Pistachio"
+    },
+    {
+        "id": 6831,
+        "uid": "5c93cf39-80e2-405f-85f1-d2d32c29b707",
+        "variety": "Cake Pop",
+        "topping": "Peanut Butter",
+        "flavor": "Peanut Butter"
+    },
+    {
+        "id": 1485,
+        "uid": "5f0a2c5e-bf6f-45c3-9893-5c7cd9c9907b",
+        "variety": "Brownie",
+        "topping": "Chocolate Sprinkles",
+        "flavor": "Peanut Butter"
+    },
+    {
+        "id": 6887,
+        "uid": "5f62d343-0de5-4e9a-98b9-a485d9c7ae93",
+        "variety": "Ice Cream",
+        "topping": "Caramel",
+        "flavor": "Coconut"
+    },
+    {
+        "id": 684,
+        "uid": "84ba48f0-0b95-40ba-a500-968faf331c05",
+        "variety": "Parfait",
+        "topping": "Glaze",
+        "flavor": "Strawberry"
+    },
+    {
+        "id": 6013,
+        "uid": "239fc7cd-4b7f-487f-87b6-f810051a523f",
+        "variety": "Fruit Cake",
+        "topping": "Toffee Bits",
+        "flavor": "Rocky Road"
+    },
+    {
+        "id": 5675,
+        "uid": "147db3f3-1840-48ca-97e6-4be8f4e60be4",
+        "variety": "Parfait",
+        "topping": "Bacon",
+        "flavor": "Espresso"
+    },
+    {
+        "id": 3810,
+        "uid": "af8b48e8-95b2-4950-8ff4-2acf5d50b416",
+        "variety": "Parfait",
+        "topping": "Rainbow Sprinkles",
+        "flavor": "Pistachio"
+    },
+    {
+        "id": 1787,
+        "uid": "4a2a418f-4532-4b11-9f70-3de35e06dce0",
+        "variety": "Cheesecake",
+        "topping": "Cookie Dough",
+        "flavor": "French Vanilla"
+    }
+]
+
+export { coffees, desserts }
