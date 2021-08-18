@@ -41,7 +41,6 @@ function App() {
             items={desserts}
             setItems={setDesserts}
             isSortEnabled={true}
-            sortMode={sortMode}
             renderRow={rowData => (<div>
               <div className="title">{rowData.variety}</div>
               <div className="desc">{rowData.topping}</div>
