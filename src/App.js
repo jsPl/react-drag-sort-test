@@ -7,34 +7,41 @@ function App() {
   const [coffees, setCoffees] = useState(coffeeData);
   const [desserts, setDesserts] = useState(dessertData);
   const [isSortEnabled, setSortEnabled] = useState(true);
+  const [sortMode, setSortMode] = useState('vertical');
 
   return (
     <div className="app">
       <div>
-        <div className="container">
+        <div className={`container ${sortMode}`}>
           <ListSort
             items={coffees}
             setItems={setCoffees}
             isSortEnabled={isSortEnabled}
+            sortMode={sortMode}
             renderRow={rowData => (<div>
-              <div className="title">{rowData.blend_name}</div>
+              <div className="title"><QueryLink query={rowData.blend_name}>{rowData.blend_name}</QueryLink></div>
               <div className="desc">{rowData.origin}</div>
             </div>)} />
         </div>
         <button type="button" onClick={() => setSortEnabled(prev => !prev)}>
           {isSortEnabled ? 'disable sort' : 'enable sort'}
         </button>
+        <select value={sortMode} onChange={evt => setSortMode(evt.target.value)}>
+          <option value="vertical">vertical</option>
+          <option value="horizontal">horizontal</option>
+        </select>
       </div>
       <pre className="state">
         {JSON.stringify(coffees.map(({ id, blend_name }) => ({ id, blend_name })), undefined, 2)}
       </pre>
 
       <div>
-        <div className="container">
+        <div className="container vertical">
           <ListSort
             items={desserts}
             setItems={setDesserts}
             isSortEnabled={true}
+            sortMode={sortMode}
             renderRow={rowData => (<div>
               <div className="title">{rowData.variety}</div>
               <div className="desc">{rowData.topping}</div>
@@ -47,5 +54,11 @@ function App() {
     </div>
   );
 }
+
+const QueryLink = ({ query, children }) => 
+  <a href={`https://google.pl/search?q=${query}`} target="_blank">
+    {children}
+  </a>
+
 
 export default App;

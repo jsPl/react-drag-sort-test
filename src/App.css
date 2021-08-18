@@ -4,8 +4,14 @@ body {
 
 .container {
     display: flex;
+}
+
+.vertical {
     flex-direction: column;
-    width: 220px;
+}
+
+.horizontal {
+    flex-direction: row;
 }
 
 .container .item {

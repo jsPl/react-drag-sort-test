@@ -1,11 +1,11 @@
 import React from 'react';
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import { arrayMove, SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
-import { restrictToVerticalAxis, restrictToParentElement } from '@dnd-kit/modifiers';
+import { DndContext, closestCorners } from '@dnd-kit/core';
+import { arrayMove, SortableContext, verticalListSortingStrategy, horizontalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
+import { restrictToVerticalAxis, restrictToHorizontalAxis, restrictToParentElement } from '@dnd-kit/modifiers';
 import classNames from 'classnames';
 import DragHandle from './drag-handle.svg';
 
-const ListSort = ({ items, setItems, isSortEnabled = true, renderRow }) => {
+const ListSort = ({ items, setItems, isSortEnabled = true, renderRow, sortMode = 'vertical' }) => {
   const handleDragEnd = ({ active, over }) => {
     if (active.id !== over.id) {
       setItems((items) => {
@@ -17,15 +17,18 @@ const ListSort = ({ items, setItems, isSortEnabled = true, renderRow }) => {
     }
   }
 
+  const modifiers = sortMode === 'vertical' ? [restrictToVerticalAxis] : [restrictToHorizontalAxis];
+  const sortStrategy = sortMode === 'vertical' ? verticalListSortingStrategy : horizontalListSortingStrategy;
+
   return (
     <DndContext
-      collisionDetection={closestCenter}
+      collisionDetection={closestCorners}
       onDragEnd={handleDragEnd}
-      modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+      modifiers={[restrictToParentElement, ...modifiers]}
     >
       <SortableContext
         items={items}
-        strategy={verticalListSortingStrategy}
+        strategy={sortStrategy}
       >
         {items.map((o, idx) => <SortableItem key={o.id} idx={idx} data={o} disabled={!isSortEnabled} renderRow={renderRow} />)}
       </SortableContext>
