@@ -14,6 +14,12 @@ body {
     flex-direction: row;
 }
 
+.grid {
+    width: 350px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .container .item {
     background-color: white;
     border: 1px solid gray;
@@ -23,6 +29,10 @@ body {
     justify-content: space-between;
     align-items: center;
     line-height: 1.5;
+}
+
+.container.grid .item {
+    width: 150px;
 }
 
 .container .item.sortable .dragHandle {
