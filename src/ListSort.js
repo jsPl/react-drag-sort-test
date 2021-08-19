@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DndContext, closestCorners } from '@dnd-kit/core';
 import { arrayMove, SortableContext, verticalListSortingStrategy, horizontalListSortingStrategy, rectSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis, restrictToHorizontalAxis, restrictToParentElement } from '@dnd-kit/modifiers';
@@ -14,11 +15,11 @@ export const SORT_MODE = {
 const ListSort = ({ items, setItems, isSortEnabled = true, renderItem, sortMode = SORT_MODE.VERTICAL }) => {
   const handleDragEnd = ({ active, over }) => {
     if (active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.findIndex(o => o.id === active.id);
-        const newIndex = items.findIndex(o => o.id === over.id);
+      setItems((state) => {
+        const oldIndex = state.findIndex(o => o.id === active.id);
+        const newIndex = state.findIndex(o => o.id === over.id);
 
-        return arrayMove(items, oldIndex, newIndex);
+        return arrayMove(state, oldIndex, newIndex);
       });
     }
   }
@@ -81,6 +82,14 @@ const chooseModifiers = sortMode => {
     default:
       return [];
   }
+}
+
+ListSort.propTypes = {
+  items: PropTypes.array.isRequired,
+  setItems: PropTypes.func.isRequired,
+  isSortEnabled: PropTypes.bool,
+  renderItem: PropTypes.func.isRequired,
+  sortMode: PropTypes.oneOf(Object.values(SORT_MODE))
 }
 
 export default ListSort;
